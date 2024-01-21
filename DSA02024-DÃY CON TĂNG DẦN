@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<int>>c;
+int a[1000],b[1000],n;
+void Result(){
+	vector<int>v;
+	for(int i=1;i<=n;i++){
+		if(b[i]) v.push_back(a[i]);
+	}
+	if(v.size()<2) return;
+	for(int i=0;i<v.size()-1;i++){
+		if(v[i]>v[i+1]) return;
+	}
+	c.push_back(v);
+}
+void Try(int i){
+	for(int j=0;j<=1;j++){
+		b[i]=j;
+		if(i==n) Result();
+		else Try(i+1);
+	}
+}
+bool cmp(vector<int> a,vector<int>b) {
+    string x="",y="";
+    for(int i : a) x+=to_string(i)+" ";
+    x.pop_back();
+    for(int i : b) y+=to_string(i)+" ";
+    y.pop_back();
+    return x<y;
+}
+int main(){
+	cin>>n;
+	for(int i=1;i<=n;i++){
+		cin>>a[i];
+	}
+	Try(1);
+	sort(c.begin(),c.end(),cmp);
+	for(vector<int>x:c){
+		for(int y:x){
+			cout<<y<<" ";
+		}
+		cout<<endl;
+	}
+}
