@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<int>a;
+vector<int>b;
+vector<vector<int>>c;
+int n;
+void Result(){
+	c.push_back(a);
+}
+void Try(int i){
+	Result();
+	if(i==1) return ;
+	for(int j=0;j< i-1;j++){
+		b.push_back(a[j]+a[j+1]);
+	}
+	a=b;
+	a.resize(i-1);
+	b.clear();
+	Try(i-1);
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		int n;cin>>n;
+		a.resize(n);
+		c.clear();
+		for(int i=0;i<n;i++){
+			cin>>a[i];
+		}
+		Try(n);
+		reverse(c.begin(),c.end());
+		for(vector<int> x:c){
+			cout<<"[";
+			for(int i=0;i<x.size();i++){
+				cout<<x[i];
+				if(i!=x.size()-1) cout<<" ";
+				else cout<<"] ";
+			}			
+		}
+		cout<<endl;
+	}
+}
+
+
