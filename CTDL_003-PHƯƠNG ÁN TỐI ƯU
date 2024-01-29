@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+//	ifstream fin("data.in");
+//	int n,k;fin>>n>>k;
+//	pair<int,int>a[n+1];
+//	for(int i=1;i<=n;i++){
+//		fin>>a[i].first;
+//	}
+//	for(int i=1;i<=n;i++){
+//		fin>>a[i].second;
+//	}
+//	fin.close();
+    int n,k;cin>>n>>k;
+    pair<int,int>a[n+1];
+    map<int,int>mp;
+    for(int i=1;i<=n;i++){
+    	cin>>a[i].first;
+	}
+	for(int i=1;i<=n;i++){
+		cin>>a[i].second;
+	}
+	vector<vector<int>>dp(n+1,vector<int>(k+1,0));
+	for(int i=1;i<=n;i++){
+		for(int j=0;j<=k;j++){
+			if(j>=a[i].second){
+				dp[i][j]=max(dp[i-1][j],dp[i-1][j-a[i].second]+a[i].first);
+			}else dp[i][j]=dp[i-1][j];
+		}
+	}
+	cout<<dp[n][k]<<endl;
+	int p=n;
+	while(n!=0){
+		if(dp[n][k]!=dp[n-1][k]){
+			mp[n]++;
+			k=k-a[n].second;
+		}
+		n--;
+	}
+	for(int i=1;i<=p;i++){
+		if(mp[i]) cout<<1<<" ";
+		else cout<<0<<" ";
+	}
+}
