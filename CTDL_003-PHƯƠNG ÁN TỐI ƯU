@@ -1,3 +1,4 @@
+-------QUY HOACH DONG-----
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
@@ -42,3 +43,50 @@ int main(){
 		else cout<<0<<" ";
 	}
 }
+------Nhanh Can-----
+//#include<bits/stdc++.h> 
+//using namespace std;
+//const int MAX=100;
+//int X[MAX];//phuong an toi uu
+//int n;//so luong do vat
+//float b,weight=0;//trong luong tui
+//float cost=0;//gia tri su dung phuong an hien dai
+//int XOPT[MAX];//phuong an toi uu
+//float FOPT=0;//gia tri toi uu 
+//float A[MAX],C[MAX];//vector trong luong va gia tri su dung
+//void Init(){
+//	cin>>n;
+//	for(int i=1;i<=n;i++){
+//		cin>>C[i];
+//	}
+//	for(int i=1;i<=n;i++){
+//		cin>>A[i];
+//	}
+//}
+//void Result(){
+//	cout<<FOPT<<endl;
+//	for(int i=1;i<=n;i++) cout<<XOPT[i]<<" ";
+//}
+//void Update(){
+//	if(cost>FOPT){
+//		FOPT=cost;
+//		for(int i=1;i<=n;i++) XOPT[i]=X[i];
+//	}
+//}
+//void Back_Track(int i){
+//	int j,t=(int)((b-weight)/A[i]);//gia tri khoi dau
+//	for(j=t;j>=0;j--){
+//		X[i]=j;
+//		weight=weight+A[i]*X[i];//trong luong phuong an bo phan
+//		cost=cost+C[i]*X[i];//gia tri phuong an bo phan
+//		if(i==n) Update();
+//		else if(cost+(C[i+1]*((b-weight)/A[i+1]))>FOPT) Back_Track(i+1);//kiem tra can
+//		weight=weight-A[i]*X[i];
+//		cost=cost-C[i]*X[i];
+//	}
+//}
+//int main(){
+//	Init();
+//	Back_Track(1);
+//	Result();
+//}
