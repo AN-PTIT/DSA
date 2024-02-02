@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+int s,p,n;
+vector<int>v,v1;
+vector<vector<int>>res;
+int b[201],prime[201],a[201],cnt;
+void sang(){
+	for(int i=0;i<=200;i++){
+		prime[i]=1;
+	}
+	prime[0]=prime[1]=0;
+	for(int i=2;i<=200;i++){
+		if(prime[i]){
+			for(int j=i*i;j<=200;j+=i){
+				prime[j]=0;
+			}
+		}
+	}
+}
+void Result(){
+	int sum=0;
+	for(int i=1;i<=n;i++){
+		if(a[b[i]]<=p) return;
+		sum+=a[b[i]];
+	}
+	if(sum!=s) return;
+	cnt++;
+	for(int i=1;i<=n;i++){
+		v1.push_back(a[b[i]]);
+	}
+	res.push_back(v1);
+	v1.clear();
+}
+void Try(int i){
+	for(int j=b[i-1]+1;j<=v.size()-n+i;j++){
+		b[i]=j;
+		if(i==n) Result();
+		else Try(i+1);
+	}
+}
+int main(){
+	sang();
+	int t;cin>>t;
+	v.push_back(0);
+	for(int i=0;i<=200;i++){
+		if(prime[i]){
+			v.push_back(i);
+		}
+	}
+	while(t--){
+		cnt=0;
+		res.clear();
+		memset(b,0,sizeof(b));
+		cin>>n>>p>>s;
+		for(int i=0;i<v.size();i++){
+			a[i]=v[i];
+		}
+		Try(1);
+		cout<<cnt<<endl;
+		sort(res.begin(),res.end());
+		for(auto x:res){
+			for(auto y:x){
+				cout<<y<<" ";
+			}
+			cout<<endl;
+		}
+	}
+}
