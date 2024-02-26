@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std; 
+int main(){
+	int t; cin>>t;
+	while(t--){
+		string s; cin >> s;
+		stack<int>X;
+		X.push(-1);
+		int cnt=0;
+		for (int i=0;i<s.length();i++) {
+			if (s[i] =='(')X.push(i);
+			else {
+				X.pop();
+				if (X.size()>0) {
+					cnt=max(cnt,i-X.top());
+				}
+				if (X.empty())X.push(i);
+			}
+		}
+		cout<<cnt<<endl;
+	}
+}
