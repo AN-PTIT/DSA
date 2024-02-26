@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	string s;
+	int t;cin>>t;
+	cin.ignore();
+	while(t--){
+		getline(cin,s);
+		stack<char>st;
+		int ok1=1;
+		for(int i=0;i<s.length();i++){
+			if(s[i]!=')') st.push(s[i]);
+			else{
+				bool ok=false;
+				while(!st.empty()){
+					char c=st.top();st.pop();
+					if(c=='+'||c=='-'||c=='*'||c=='/'){
+						ok=true;
+					}
+					if(c=='(') break;
+				}
+				if(!ok){
+					cout<<"Yes"<<endl;
+					ok1=0;
+					break;
+				}
+			}
+		}
+		if(ok1) cout<<"No"<<endl;
+	}
+}
