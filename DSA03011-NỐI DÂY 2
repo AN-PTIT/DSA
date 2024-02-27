@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int MOD=1e9+7;
+int main(){
+	int t;cin>>t;
+	while(t--){
+		ll n;cin>>n;
+	    priority_queue<ll,vector<ll>,greater<ll>>v;
+	    for(int i=0;i<n;i++){
+		    ll x;cin>>x;
+		    v.push(x);
+	    }
+	    ll ans=0;
+	    while(v.size()>1){
+		    ll x=v.top();v.pop();
+	        ll y=v.top();v.pop();
+	        ll z=(x+y)%MOD;
+	        ans+=z;
+	        ans%=MOD;
+	        v.push(z);
+	    }
+	    cout<<ans<<endl;
+	}
+}
+
