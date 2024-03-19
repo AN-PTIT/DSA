@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MOD=1e9+7;
+long long rev(long long n){
+	long long k=0;
+	while(n>0){
+		k=k*10+n%10;
+		n/=10;
+	}
+	return k;
+}
+long long chia(long long a,long long b){
+	if(b==0) return 1;
+	if(b%2==0) return (chia(a,b/2)*chia(a,b/2))%MOD;
+	else return (a*((chia(a,b/2)*chia(a,b/2))%MOD))%MOD ; 
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		long long n;cin>>n;
+		long long k=rev(n);
+		cout<<chia(n,k)<<endl;
+	}
+}
