@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int MOD=1e9+7;
+ll pow(ll a,ll b){
+	if(b==0) return 1;
+	ll res=pow(a,b/2)%MOD;
+	if(b&1) return (((res*res)%MOD)*a)%MOD;
+	else return (res*res)%MOD;
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		ll n,k;cin>>n>>k;
+		cout<<pow(n,k)<<endl;
+	}
+} 
