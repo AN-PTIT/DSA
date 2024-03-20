@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+string s;
+void Try(int idx,string v){
+	if(v.size()) cout<<v<<" ";
+	for(int i=idx;i<s.length();i++){
+		v+=s[i];
+		Try(i+1,v);
+		v.pop_back();
+	}
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		int n;cin>>n;
+		cin>>s;
+		Try(0,"");
+		cout<<endl;
+	}
+}
