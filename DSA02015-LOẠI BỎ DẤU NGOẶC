@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+int max_len;
+map<string,bool>mp;
+bool check(string s){
+	if(s.length()<2) return false;
+	stack<char>st;
+	for(int i=0;i<s.length();i++){
+		if(s[i]=='(') st.push('(');
+		else if(s[i]==')'){
+			if(st.empty()) return false;
+			st.pop();
+		}
+	}
+	return st.empty();
+}
+void Try(string s,int idx){
+	if(s.length()<max_len) return;
+	if(check(s)){
+		if(s.length()>max_len){
+			max_len=s.length();
+			mp.clear();
+		}
+		mp[s]=true;
+		return;
+	}
+	for(int i=idx;i<s.length();i++){
+		if(s[i]=='('||s[i]==')'){
+			string tmp=s;
+			tmp.erase(i,1);
+			Try(tmp,i);
+		}	
+	}
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		string s;cin>>s;
+		mp.clear();
+		max_len=0;
+		Try(s,0);
+		if(mp.empty()) cout<<-1<<endl;
+		else{
+			for(auto x:mp){
+				cout<<x.first<<" ";
+			}
+			cout<<endl;
+		}
+	}
+}
