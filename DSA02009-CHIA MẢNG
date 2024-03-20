@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n,k,summ;
+int X[21];
+bool ok;
+bool check[21];
+void Try(int cnt, int sum) {
+    if(ok) return;
+    if(cnt==k){
+    	ok=1;
+    	return;
+	}
+	for(int i=0;i<n;i++){
+		if(!check[i]){
+			check[i]=1;
+			if(sum==summ){
+				Try(cnt+1,0);
+				return;
+			}
+			else if(sum<summ) Try(cnt,sum+X[i]);
+			else return;
+		}
+		check[i]=false;
+	}
+} 
+int main(){
+	int t;cin>>t;
+	while(t--){
+		ok=false;
+		memset(check,false,sizeof(check));
+		cin>>n>>k;
+		summ=0;
+		for(int i=0;i<n;i++){
+			cin>>X[i];
+			summ+=X[i];
+		}
+		if(summ%k!=0) cout<<0<<endl;
+		else{
+			summ/=k;
+			Try(0,0);
+			if(ok) cout<<1<<endl;
+			else cout<<0<<endl;
+		}
+	}
+}
+
+
