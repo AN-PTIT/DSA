@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+string X[1000];
+int res=INT_MAX;
+bool check[1000];
+int n;
+int count(string a,string b){
+	int cnt=0;
+	for(auto x:a) for(auto y:b) if(x==y) cnt++;
+	return cnt;
+}
+void Try(int dem,int sum,int k){
+	for(int i=1;i<=n;i++){
+		if(!check[i]){
+			check[i]=true;
+			if(dem==n) res=min(res,sum+count(X[k],X[i]));
+			else if(res>sum&&dem<n) Try(dem+1,sum+count(X[k],X[i]),i);
+			check[i]=false;
+		}
+	}
+}
+int main(){
+	cin>>n;
+	for(int i=1;i<=n;i++) cin>>X[i];
+	Try(1,0,0);
+	cout<<res<<endl;
+}
