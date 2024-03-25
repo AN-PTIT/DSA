@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int X[10000];
+int n,k; 
+void dsa(){
+	int i=k;
+	while(X[i-1]+1==X[i]&&i) i--;
+	if(i){
+		X[i]--;
+		for(int j=i+1;j<=k;j++){
+			X[j]=n-k+j;
+		}
+		for(int j=1;j<=k;j++){
+			cout<<X[j]<<" ";
+		}
+	}else for(int j=n-k+1;j<=n;j++) cout<<j<<" ";
+	cout<<endl;
+} 
+int main(){
+	int t;cin>>t;
+	while(t--){
+		cin>>n>>k;
+		for(int i=1;i<=k;i++){
+			cin>>X[i];
+		}
+		dsa();
+	}
+}
