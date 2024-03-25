@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;cin>>t;
+	while(t--){
+		int n;cin>>n;
+		queue<pair<int,int>>q;
+		q.push({0,n});
+		while(1){
+			pair<int,int>x=q.front();
+			q.pop();
+			if(x.second==1){
+				cout<<x.first <<endl;
+				break;
+			}
+			if(x.second%3==0){
+				q.push({x.first+1,x.second/3});
+			}
+			if(x.second%2==0){
+				q.push({x.first+1,x.second/2});
+			}
+			q.push({x.first+1,x.second-1});
+		}
+	}
+} 
