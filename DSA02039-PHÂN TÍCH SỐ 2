@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<int>>c;
+int n;
+void Try(int idx,int k,vector<int>v){
+	if(k==0){
+		c.push_back(v);
+		return;
+	}
+	for(int i=idx;i>=1;i--){
+		if(i<=k){
+			v.push_back(i);
+			Try(i,k-i,v);
+			v.pop_back();
+		}
+	}
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		cin>>n;
+		c.clear();
+		Try(n,n,{});
+		cout<<c.size()<<endl;
+		for(auto x:c){
+			cout<<"(";
+			for(int i=0;i<x.size()-1;i++){
+				cout<<x[i]<<" ";
+			}
+			cout<<x.back()<<") ";
+		}
+		cout<<endl;
+	}
+} 
