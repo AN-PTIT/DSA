@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+int b[100];
+int k;
+vector<vector<int>>c;
+void Try(int i,vector<int>a){
+	if(a.size()==k) c.push_back(a);
+	if(i>n) return;
+	for(int j=i;j<=n;j++){
+		a.push_back(b[j]);
+		Try(j+1,a);
+		a.pop_back();
+	}
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		c.clear();
+		cin>>n>>k;
+		for(int i=1;i<=n;i++) cin>>b[i];
+		sort(b+1,b+n+1);
+		Try(1,{});
+		sort(c.begin(),c.end());
+		for(auto x:c){
+			for(auto y:x){
+				cout<<y<<" ";
+			}
+			cout<<endl;
+		}
+	}
+} 
+
+
