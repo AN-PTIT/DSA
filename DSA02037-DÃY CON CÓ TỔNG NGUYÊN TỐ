@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+int b[100];
+int prime[100000];
+void snt(){
+	for(int i=2;i<=10000;i++){
+		prime[i]=1;
+	}
+	for(int i=2;i<=10000;i++){
+		prime[1]=prime[0]=0;
+		if(prime[i]){
+			for(int j=i*i;j<=100000;j+=i){
+				prime[j]=0;
+			}
+		}
+	}
+} 
+vector<vector<int>>c;
+void Try(int i,int k,vector<int>a){
+	if(prime[k]) c.push_back(a);
+	if(i>n) return;
+	for(int j=i;j<=n;j++){
+		a.push_back(b[j]);
+		Try(j+1,k+b[j],a);
+		a.pop_back();
+	}
+}
+int main(){
+	int t;cin>>t;
+	snt();
+	while(t--){
+		c.clear();
+		cin>>n;
+		for(int i=1;i<=n;i++) cin>>b[i];
+		sort(b+1,b+n+1,greater<int>());
+		Try(1,0,{});
+		sort(c.begin(),c.end());
+		for(auto x:c){
+			for(auto y:x){
+				cout<<y<<" ";
+			}
+			cout<<endl;
+		}
+	}
+} 
+
+
