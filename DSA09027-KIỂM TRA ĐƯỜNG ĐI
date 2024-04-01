@@ -35,3 +35,53 @@ int main(){
 		}
 	}
 } 
+
+//kiem tra bang do thi lien thong
+//#include<bits/stdc++.h>
+//using namespace std;
+//int n,m,q,x,y,ans;
+//vector<int>adj[1001];
+//map<int,int>mp;
+//bool visited[1001];
+//void dfs(int u){
+//	visited[u]=true;
+//	mp[u]=ans;
+//	for(int x:adj[u]){
+//		if(!visited[x]) dfs(x);
+//	}
+//}
+//void demsolt(){
+//	ans=0;
+//	memset(visited,false,sizeof(visited));
+//	for(int i=1;i<=n;i++){
+//		if(!visited[i]){
+//			ans++;
+//			dfs(i);
+//		}
+//	}
+//}
+//void check(){
+//	if(mp[y]==mp[x]) cout<<"YES"<<endl;
+//	else cout<<"NO"<<endl;
+//}
+//int main(){
+//	int t;cin>>t;
+//	while(t--){
+//		mp.clear();
+//		cin>>n>>m;
+//		for(int i=1;i<=n;i++){
+//			adj[i].clear();
+//		}
+//		for(int i=0;i<m;i++){
+//			int x,y;cin>>x>>y;
+//			adj[x].push_back(y);
+//			adj[y].push_back(x);
+//		}
+//		demsolt();
+//		cin>>q;
+//		while(q--){
+//			cin>>x>>y;
+//			check();
+//		}
+//	}
+//} 
