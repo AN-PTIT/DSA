@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+int V,E,u,v,x,y,lthong;
+vector<vector<int>>a;
+vector<pair<int,int>>canhcau;
+vector<bool>check;
+void bfs(int start){
+	queue<int>q;
+	q.push(start);
+	while(!q.empty()){
+		u=q.front();q.pop();
+		check[u]=true;
+		for(int v:a[u]){
+			if((u==x&&v==y)||(u==y&&v==x)) continue;
+			if(!check[v]){
+				q.push(v);
+			}
+		}
+	}
+}
+void ktracanhcau(){
+	check.clear();check.resize(V+1,false);
+	int new_lthong=0;
+	for(int i=1;i<=V;i++){
+		if(!check[i]){
+			bfs(i);
+			new_lthong++;
+		}
+	}
+	if(new_lthong>lthong){
+		cout<<x<<" "<<y<<" "; 
+	}
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		lthong=0;
+		cin>>V>>E;
+		a.clear();a.resize(V+1);
+		canhcau.clear();canhcau.resize(E+1);
+		check.clear();check.resize(V+1,false);
+		for(int i=1;i<=E;i++){
+			cin>>u>>v;
+			canhcau[i]={u,v};
+			a[u].push_back(v);
+			a[v].push_back(u);
+		}
+		for(int i=1;i<=V;i++){
+			if(!check[i]){
+				bfs(i);
+				lthong++;
+			}
+		}
+		for(int i=1;i<=E;i++){
+			x=canhcau[i].first;
+			y=canhcau[i].second;
+			ktracanhcau();
+		}
+		cout<<endl;
+	}
+}
