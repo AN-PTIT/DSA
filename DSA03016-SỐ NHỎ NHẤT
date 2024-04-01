@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;cin>>t;
+	while(t--){
+		int s,d;cin>>s>>d;
+		if(s>9*d){
+			cout<<-1<<endl;
+			continue;
+		}
+		s--;
+		string ans(d,'0');
+		int i=ans.length()-1;
+		while(s>9){
+			ans[i]='9';
+			s-=9;
+			i--;
+		}
+		ans[i]=s+'0';
+		ans[0]++;
+		cout<<ans<<endl;
+	}
+}
