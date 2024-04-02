@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+int v,e;
+vector<int>ve[1001];
+bool check[1001];
+void bfs(int u){
+	check[u]=true;
+	queue<int>q;
+	q.push(u);
+	while(!q.empty()){
+		int x=q.front();q.pop();
+		for(int y:ve[x]){
+			if(!check[y]){
+				q.push(y);
+				check[y]=true;
+			}
+		}
+	}
+}
+int checklthong(int cnt){
+	for(int i=1;i<=v;i++){
+		if(!check[i]){
+			cnt++;
+			bfs(i);
+		}
+	}
+	return cnt;
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		cin>>v>>e;
+		for(int i=1;i<=v;i++){
+			ve[i].clear();
+		}
+		memset(check,false,sizeof(check));
+		for(int i=1;i<=e;i++){
+			int x,y;cin>>x>>y;
+			ve[x].push_back(y);
+			ve[y].push_back(x);
+		}
+		int lthong=0;
+		lthong=checklthong(0);
+		int new_lthong=0;
+		for(int i=1;i<=v;i++){
+			memset(check,false,sizeof(check));
+			check[i]=true;
+			new_lthong=checklthong(0);
+			if(new_lthong>lthong){
+				cout<<i<<" ";
+			}
+		}
+		cout<<endl;
+	}
+} 
