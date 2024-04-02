@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+//thuat toan kosaraju
+//lthong manh khi doi chieu van lthong
+int n,m;
+vector<int>adj[1001],r_adj[1001];
+bool used[1001];
+stack<int>st;
+void nhap(){
+	cin>>n>>m;
+	for(int i=0;i<m;i++){
+		int x,y;cin>>x>>y;
+		adj[x].push_back(y);
+		r_adj[y].push_back(x);
+	}
+}
+void dfs1(int u){//adj
+	used[u]=true;
+	for(int v:adj[u]){
+		if(!used[v]){
+			dfs1(v);
+		}
+	}
+//	cout<<u<<" ";
+	st.push(u);
+}
+void dfs2(int u){//r_adj
+	used[u]=true;
+//	cout<<u<<" ";
+	for(int v:r_adj[u]){
+		if(!used[v]){
+			dfs2(v);
+		}
+	}
+}
+void SCC(){
+	memset(used,false,sizeof(used));
+	for(int i=1;i<=n;i++){
+		if(!used[i]){
+			dfs1(i);
+		}
+	}
+	cout<<endl;
+	memset(used,false,sizeof(used));
+	int cnt=0;
+	while(!st.empty()){
+		int u=st.top();st.pop();
+		if(!used[u]){
+			dfs2(u);
+			cnt++;////demsoltm
+			cout<<endl;
+		}
+	}
+	if(cnt==1) cout<<"YES"<<endl;
+	else cout<<"NO"<<endl;
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		for(int i=1;i<=n;i++){
+			adj[i].clear();
+			r_adj[i].clear();
+		}
+		nhap();
+		SCC();
+	}
+}
