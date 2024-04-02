@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+int v,e,s,t;
+vector<int>ve[1001];
+bool check[1001];
+int path[1001];
+void dfs(int u){
+	check[u]=true;
+	for(int x:ve[u]){
+		if(!check[x]){
+			path[x]=u;
+			dfs(x);
+		}
+	}
+}
+void duongdi(){
+	vector<int>walk;
+	while(t!=s){
+		walk.push_back(t);
+		t=path[t];
+	}
+	walk.push_back(s);
+	reverse(walk.begin(),walk.end());
+	for(int x:walk){
+		cout<<x<<" ";
+	}
+	cout<<endl;
+}
+int main(){
+	int test;cin>>test;
+	while(test--){
+		cin>>v>>e>>s>>t;
+		for(int i=1;i<=v;i++){
+			ve[i].clear();
+		}
+		memset(path,0,sizeof(path));
+		memset(check,false,sizeof(check));
+		for(int i=1;i<=e;i++){
+			int x,y;cin>>x>>y;
+			ve[x].push_back(y);
+			ve[y].push_back(x);
+		}
+		dfs(s);
+		if(!check[t]) cout<<-1<<endl;
+		else duongdi();
+	}
+} 
