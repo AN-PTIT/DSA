@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+//chu trinh euler <=> deg chan va lthong
+//dg di euler <=> deg chan hoac 2 deg le va lthong
+int v,e;
+int deg[1001];
+vector<int>ve[1001];
+bool check[1001];
+void dfs(int u){
+	check[u]=true;
+	for(int x:ve[u]){
+		if(!check[x]){
+			dfs(x);
+			check[x]=true;
+		}
+	}
+}
+void euler(){
+	int cnt=0;
+	for(int i=1;i<=v;i++){
+		if(ve[i].size()%2==1) cnt++;
+	}
+	if(cnt==2) cout<<1<<endl;
+	else if(cnt==0) cout<<2<<endl;
+	else cout<<0<<endl;
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		cin>>v>>e;
+		for(int i=1;i<=v;i++){
+			ve[i].clear();
+		}
+		memset(deg,0,sizeof(deg));
+		memset(check,false,sizeof(check));
+		for(int i=0;i<e;i++){
+			int x,y;cin>>x>>y;
+			ve[x].push_back(y);
+			ve[y].push_back(x);
+			deg[x]++;
+			deg[y]++;
+		}
+		int lthong=0;
+		for(int i=1;i<=v;i++){
+			if(!check[i]){
+				lthong++;
+				dfs(i);
+			}
+		}
+		if(lthong==1){
+			euler();
+		}else{
+			cout<<0<<endl;
+		}
+	}
+}
