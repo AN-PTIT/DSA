@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+vector<int>v(5),a(5);
+char dau[3]={'+','-','*'};
+bool check[5];
+string s(4,'0');
+int ok1,ok2;
+int check1(string s){
+	int cnt=0;
+	int sum=a[0];
+	for(int i=1;i<5;i++){
+		if(s[cnt]=='+'){
+			sum+=a[i];
+		}else if(s[cnt]=='-'){
+			sum-=a[i];
+		}else if(s[cnt]=='*'){
+			sum*=a[i];
+		}
+		cnt++;
+	}
+	return sum==23;
+}
+void Trydau(int i){
+	if(ok1) return;
+	if(i==4){
+		if(check1(s)) ok1=1;
+		return;
+	}
+	for(int j=0;j<3;j++){
+		s[i]=dau[j];
+		Trydau(i+1);
+	}
+}
+void Tryso(int i){
+	if(ok2) return;
+	if(i==5){
+		Trydau(0);
+		if(ok1) ok2=1;
+		return;
+	}
+	for(int j=0;j<5;j++){
+		if(!check[j]){
+			check[j]=true;
+			a[i]=v[j];
+			Tryso(i+1);
+			check[j]=false;
+		}
+	}
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		ok1=ok2=0;
+		memset(check,false,sizeof(check));
+		s.resize(4,'0');
+		a.resize(5,'0');
+		for(int i=0;i<5;i++){
+			cin>>v[i];
+		}
+		Tryso(0);
+		if(ok2) cout<<"YES"<<endl;
+		else cout<<"NO"<<endl;
+	}
+}
