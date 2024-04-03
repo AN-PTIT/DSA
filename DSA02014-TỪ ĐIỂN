@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+int r,n,m;
+int dx[8]={-1,-1,-1,0,0,1,1,1};
+int dy[8]={-1,0,1,-1,1,-1,0,1};
+bool check[4][4];
+map<string,int>mp;
+vector<string>b;
+string a[4][4];//char thi sai ?
+void Trychu(int i,int j,string s){
+	if(mp[s]){
+		b.push_back(s);
+	}
+	for(int k=0;k<8;k++){
+		int ix=i+dx[k];
+		int iy=j+dy[k];
+		if(ix>=0&&ix<n&&iy>=0&&iy<m&&!check[ix][iy]){
+			check[ix][iy]=true;
+			Trychu(ix,iy,s+a[ix][iy]);
+			check[ix][iy]=false;
+		}
+	}
+}
+int main(){
+	int t;cin>>t;
+	while(t--){
+		cin>>r>>n>>m;
+		memset(check,false,sizeof(check));
+		b.clear();
+		mp.clear();
+		for(int i=0;i<r;i++){
+			string s;cin>>s;
+			mp[s]=1;
+		}
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m;j++){
+				cin>>a[i][j];
+			}
+		}
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m;j++){
+				check[i][j]=true;
+				Trychu(i,j,a[i][j]);
+				check[i][j]=false;
+			}
+		}
+		if(b.empty()){
+			cout<<-1<<endl;
+		}else{
+		    for(int i=0;i<b.size();i++) cout<<b[i]<<" ";
+		    cout<<endl;
+		}
+	}
+} 
