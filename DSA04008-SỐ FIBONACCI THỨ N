@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MOD=1e9+7;
+unordered_map<long long,long long>F;
+long long fibo(long long n){
+	if(F[n]) return F[n];
+	long long k=n>>1;
+	if(n&1) return F[n]=(fibo(k)*fibo(k+1)+fibo(k-1)*fibo(k))%MOD;
+	return F[n]=(fibo(k)*fibo(k)+fibo(k-1)*fibo(k-1))%MOD;
+}
+int main(){
+	int t;cin>>t;
+	F[0]=F[1]=1;
+	while(t--){
+		int n;cin>>n;
+		if(!n) cout<<0<<endl;
+		else cout<<fibo(n-1)<<endl;
+	}
+}
