@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	string s;
+	int t;cin>>t;
+	while(t--){
+		cin>>s;
+		stack<char>st;
+		int cnt=0;
+		for(int i=0;i<s.length();i++){
+			if(s[i]=='('){
+				st.push(s[i]);
+			}else{
+				if(st.empty()){
+					s[i]='(';
+					st.push(s[i]);
+					cnt++;
+				}else{
+					st.pop();
+				}
+			}
+		}
+		if(!st.empty()){
+			cnt+=st.size()/2;
+		}
+		cout<<cnt<<endl; 
+	}
+}
+
+
