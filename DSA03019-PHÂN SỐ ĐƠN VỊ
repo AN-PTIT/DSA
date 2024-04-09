@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int MOD=1e9+7;
+int main(){
+	int t;cin>>t;
+	while(t--){
+		ll a,b;cin>>a>>b;
+		while(1){
+			if(b%a==0){
+				cout<<1<<"/"<<b/a<<endl;
+				break;
+			}
+			ll x=b/a+1;
+			cout<<1<<"/"<<x<<" + ";
+			a=a*x-b;
+			b*=x;
+		}
+	}
+}
+
